@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ContactosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Miembros">
+    <Key>
+      <PropertyRef Name="idMiembro" />
+    </Key>
+    <Property Name="idMiembro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="m_nombre" Type="varchar" MaxLength="30" />
+    <Property Name="m_apellido" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Visitas">
+    <Key>
+      <PropertyRef Name="idVisita" />
+    </Key>
+    <Property Name="idVisita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="motivo_visita" Type="varchar" MaxLength="100" />
+    <Property Name="nombre_completo" Type="varchar" MaxLength="60" />
+    <Property Name="h_entrada" Type="datetime" />
+    <Property Name="h_salida" Type="datetime" />
+    <Property Name="m_recibio" Type="varchar" MaxLength="50" />
+    <Property Name="idMiembro" Type="int" />
+  </EntityType>
+  <Association Name="FK__Visitas__idMiemb__4BAC3F29">
+    <End Role="Miembros" Type="Self.Miembros" Multiplicity="0..1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miembros">
+        <PropertyRef Name="idMiembro" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="idMiembro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ContactosModelStoreContainer">
+    <EntitySet Name="Miembros" EntityType="Self.Miembros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visitas" EntityType="Self.Visitas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Visitas__idMiemb__4BAC3F29" Association="Self.FK__Visitas__idMiemb__4BAC3F29">
+      <End Role="Miembros" EntitySet="Miembros" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

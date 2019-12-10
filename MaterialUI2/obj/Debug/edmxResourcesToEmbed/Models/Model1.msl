@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ContactosModelStoreContainer" CdmEntityContainer="ContactosEntities">
+    <EntitySetMapping Name="Miembros">
+      <EntityTypeMapping TypeName="ContactosModel.Miembros">
+        <MappingFragment StoreEntitySet="Miembros">
+          <ScalarProperty Name="idMiembro" ColumnName="idMiembro" />
+          <ScalarProperty Name="m_nombre" ColumnName="m_nombre" />
+          <ScalarProperty Name="m_apellido" ColumnName="m_apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visitas">
+      <EntityTypeMapping TypeName="ContactosModel.Visitas">
+        <MappingFragment StoreEntitySet="Visitas">
+          <ScalarProperty Name="idVisita" ColumnName="idVisita" />
+          <ScalarProperty Name="motivo_visita" ColumnName="motivo_visita" />
+          <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+          <ScalarProperty Name="h_entrada" ColumnName="h_entrada" />
+          <ScalarProperty Name="h_salida" ColumnName="h_salida" />
+          <ScalarProperty Name="m_recibio" ColumnName="m_recibio" />
+          <ScalarProperty Name="idMiembro" ColumnName="idMiembro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

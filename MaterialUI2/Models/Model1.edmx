@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ContactosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Miembros">
+          <Key>
+            <PropertyRef Name="idMiembro" />
+          </Key>
+          <Property Name="idMiembro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_nombre" Type="varchar" MaxLength="30" />
+          <Property Name="m_apellido" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Visitas">
+          <Key>
+            <PropertyRef Name="idVisita" />
+          </Key>
+          <Property Name="idVisita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="motivo_visita" Type="varchar" MaxLength="100" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="60" />
+          <Property Name="h_entrada" Type="datetime" />
+          <Property Name="h_salida" Type="datetime" />
+          <Property Name="m_recibio" Type="varchar" MaxLength="50" />
+          <Property Name="idMiembro" Type="int" />
+        </EntityType>
+        <Association Name="FK__Visitas__idMiemb__4BAC3F29">
+          <End Role="Miembros" Type="Self.Miembros" Multiplicity="0..1" />
+          <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Miembros">
+              <PropertyRef Name="idMiembro" />
+            </Principal>
+            <Dependent Role="Visitas">
+              <PropertyRef Name="idMiembro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ContactosModelStoreContainer">
+          <EntitySet Name="Miembros" EntityType="Self.Miembros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visitas" EntityType="Self.Visitas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Visitas__idMiemb__4BAC3F29" Association="Self.FK__Visitas__idMiemb__4BAC3F29">
+            <End Role="Miembros" EntitySet="Miembros" />
+            <End Role="Visitas" EntitySet="Visitas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ContactosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Miembros">
+          <Key>
+            <PropertyRef Name="idMiembro" />
+          </Key>
+          <Property Name="idMiembro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="m_apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Visitas" Relationship="Self.FK__Visitas__idMiemb__4BAC3F29" FromRole="Miembros" ToRole="Visitas" />
+        </EntityType>
+        <EntityType Name="Visitas">
+          <Key>
+            <PropertyRef Name="idVisita" />
+          </Key>
+          <Property Name="idVisita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="motivo_visita" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_completo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="h_entrada" Type="DateTime" Precision="3" />
+          <Property Name="h_salida" Type="DateTime" Precision="3" />
+          <Property Name="m_recibio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idMiembro" Type="Int32" />
+          <NavigationProperty Name="Miembros" Relationship="Self.FK__Visitas__idMiemb__4BAC3F29" FromRole="Visitas" ToRole="Miembros" />
+        </EntityType>
+        <Association Name="FK__Visitas__idMiemb__4BAC3F29">
+          <End Role="Miembros" Type="Self.Miembros" Multiplicity="0..1" />
+          <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Miembros">
+              <PropertyRef Name="idMiembro" />
+            </Principal>
+            <Dependent Role="Visitas">
+              <PropertyRef Name="idMiembro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ContactosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Miembros" EntityType="Self.Miembros" />
+          <EntitySet Name="Visitas" EntityType="Self.Visitas" />
+          <AssociationSet Name="FK__Visitas__idMiemb__4BAC3F29" Association="Self.FK__Visitas__idMiemb__4BAC3F29">
+            <End Role="Miembros" EntitySet="Miembros" />
+            <End Role="Visitas" EntitySet="Visitas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ContactosModelStoreContainer" CdmEntityContainer="ContactosEntities">
+          <EntitySetMapping Name="Miembros">
+            <EntityTypeMapping TypeName="ContactosModel.Miembros">
+              <MappingFragment StoreEntitySet="Miembros">
+                <ScalarProperty Name="idMiembro" ColumnName="idMiembro" />
+                <ScalarProperty Name="m_nombre" ColumnName="m_nombre" />
+                <ScalarProperty Name="m_apellido" ColumnName="m_apellido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visitas">
+            <EntityTypeMapping TypeName="ContactosModel.Visitas">
+              <MappingFragment StoreEntitySet="Visitas">
+                <ScalarProperty Name="idVisita" ColumnName="idVisita" />
+                <ScalarProperty Name="motivo_visita" ColumnName="motivo_visita" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="h_entrada" ColumnName="h_entrada" />
+                <ScalarProperty Name="h_salida" ColumnName="h_salida" />
+                <ScalarProperty Name="m_recibio" ColumnName="m_recibio" />
+                <ScalarProperty Name="idMiembro" ColumnName="idMiembro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
